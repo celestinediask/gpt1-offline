@@ -1,0 +1,12 @@
+services:
+  gpt-runner:
+    build: .
+    image: gpt1-offline
+    container_name: gpt1-container
+    
+    # CRITICAL: Keeps the input channel open so you can chat
+    stdin_open: true 
+    tty: true        
+
+    # Ensures clean environment
+    restart: no
