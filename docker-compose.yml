@@ -4,9 +4,15 @@ services:
     image: gpt1-offline
     container_name: gpt1-container
     
-    # CRITICAL: Keeps the input channel open so you can chat
+    # 1. The Physical Lock: Removes the network interface completely
+    network_mode: none
+    
+    # 2. The Software Lock: Tells HuggingFace "Don't even try"
+    environment:
+      - HF_HUB_OFFLINE=1
+      - TRANSFORMERS_OFFLINE=1
+
+    # Standard interaction settings
     stdin_open: true 
     tty: true        
-
-    # Ensures clean environment
     restart: no
