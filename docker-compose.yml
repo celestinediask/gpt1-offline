@@ -2,17 +2,16 @@ services:
   gpt-runner:
     build: .
     image: gpt1-offline
-    container_name: gpt1-container
+    container_name: gpt1-web-container
     
-    # 1. The Physical Lock: Removes the network interface completely
-    network_mode: none
-    
-    # 2. The Software Lock: Tells HuggingFace "Don't even try"
+    # Map port 7860 on the container to 7860 on your server
+    ports:
+      - "7860:7860"
+
+    # Software lock ensures model doesn't download anything
     environment:
       - HF_HUB_OFFLINE=1
       - TRANSFORMERS_OFFLINE=1
 
-    # Standard interaction settings
-    stdin_open: true 
-    tty: true        
-    restart: no
+    # Run the Web App
+    command: python -u web_app.py

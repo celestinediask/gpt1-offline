@@ -26,6 +26,6 @@ RUN python -c "from transformers import OpenAIGPTTokenizer, OpenAIGPTLMHeadModel
     OpenAIGPTLMHeadModel.from_pretrained('openai-gpt')"
 
 # --- LAYER 4: App Code ---
-COPY app.py .
+COPY . .
 
 CMD ["python", "-u", "app.py"]
